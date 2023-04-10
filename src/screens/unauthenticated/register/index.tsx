@@ -1,5 +1,7 @@
+import { Box } from "@mui/material";
+
 const Register: React.FC = () => {
-  return <div>Tela de Cadastro</div>;
+  return <Box>Tela de Cadastro</Box>;
 };
 
 export default Register;
