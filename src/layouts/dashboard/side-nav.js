@@ -8,12 +8,12 @@ import {
   Button,
   Divider,
   Drawer,
-  Link,
   Stack,
   SvgIcon,
   Typography,
   useMediaQuery,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { Logo } from "../../components/logo";
 import { Scrollbar } from "../../components/scrollbar";
 import { items } from "./config";
@@ -34,7 +34,7 @@ export const SideNav = (props) => {
         },
         "& .simplebar-scrollbar:before": {
           background: "neutral.400",
-        }
+        },
       }}
     >
       <Box
@@ -47,7 +47,7 @@ export const SideNav = (props) => {
         <Box sx={{ p: 3 }}>
           <Box
             component={Link}
-            href="/"
+            to="/"
             sx={{
               display: "inline-flex",
               height: 32,

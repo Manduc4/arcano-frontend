@@ -1,7 +1,6 @@
-import { Box } from "@mui/material";
+import View from "./View";
 
-const Register: React.FC = () => {
-  return <Box>Tela de Cadastro</Box>;
+const Register = () => {
+  return <View />;
 };
-
 export default Register;
