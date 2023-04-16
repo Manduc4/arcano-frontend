@@ -2,6 +2,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 import Register from "../screens/unauthenticated/register";
 import { Layout } from "../layouts/dashboard/layout";
 import NotFound from "../screens/404";
+import Home from "../screens/home";
 
 export default function Router() {
   return useRoutes([
@@ -9,6 +10,10 @@ export default function Router() {
       path: "/",
       element: <Layout />,
       children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
         {
           path: "cadastros",
           element: <Register />,
