@@ -7,7 +7,7 @@ const View = () => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      height="100%"
+      height="100vh"
     >
       <Typography variant="h1" align="center">
         Seja bem vindo!
