@@ -39,13 +39,16 @@ const View = () => {
         password: values.password,
       };
 
-      const response: any = await dispatch(fetchLogin(payload));
-
-      if (response.meta.requestStatus === "fulfilled") {
-        enqueueSnackbar(response.payload.message, { variant: "success" });
-        console.log(response);
-      } else {
-        enqueueSnackbar(response.payload.message, { variant: "error" });
+      try {
+        const response: any = await dispatch(fetchLogin(payload));
+        if (response.meta.requestStatus === "fulfilled") {
+          enqueueSnackbar(response.payload.message, { variant: "success" });
+          console.log(response);
+        } else {
+          enqueueSnackbar(response.payload.message, { variant: "error" });
+        }
+      } catch (error: any) {
+        console.log(error);
       }
     },
   });
