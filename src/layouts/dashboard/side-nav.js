@@ -28,6 +28,7 @@ export const SideNav = (props) => {
   const content = (
     <Scrollbar
       sx={{
+        overflow: 'hidden',
         height: "100%",
         "& .simplebar-content": {
           height: "100%",
@@ -70,10 +71,10 @@ export const SideNav = (props) => {
           >
             <div>
               <Typography color="inherit" variant="subtitle1">
-                Devias
+                Arcano
               </Typography>
               <Typography color="neutral.400" variant="body2">
-                Production
+                Em desenvolvimento
               </Typography>
             </div>
             <SvgIcon fontSize="small" sx={{ color: "neutral.500" }}>

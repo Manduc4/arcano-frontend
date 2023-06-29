@@ -1,29 +1,42 @@
 // import { useCallback } from 'react';
 // import { useRouter } from 'next/navigation';
-import PropTypes from 'prop-types';
-import { Box, Divider, MenuItem, MenuList, Popover, Typography } from '@mui/material';
-// import { useAuth } from 'src/hooks/use-auth';
+import PropTypes from "prop-types";
+import {
+  Box,
+  Divider,
+  MenuItem,
+  MenuList,
+  Popover,
+  Typography,
+} from "@mui/material";
+import { useDispatch, useSelector } from "../../services/store";
+import { logout } from "../../services/store/slices/auth";
+import { LoadingButton } from "@mui/lab";
+import { useSnackbar } from "notistack";
 
 export const AccountPopover = (props) => {
   const { anchorEl, onClose, open } = props;
-  // const router = useRouter();
-  // const auth = useAuth();
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.Auth);
+  const { enqueueSnackbar } = useSnackbar();
 
-  // const handleSignOut = useCallback(
-  //   () => {
-  //     onClose?.();
-  //     auth.signOut();
-  //     router.push('/auth/login');
-  //   },
-  //   [onClose, auth, router]
-  // );
+  const handleLogout = async () => {
+    const response = await dispatch(logout());
+
+    if (response.meta.requestStatus) {
+      enqueueSnackbar(response.payload.message, { varian: "success" });
+    } else {
+      enqueueSnackbar(response.payload.message, { varian: "error" });
+      console.error(response.payload.message);
+    }
+  };
 
   return (
     <Popover
       anchorEl={anchorEl}
       anchorOrigin={{
-        horizontal: 'left',
-        vertical: 'bottom'
+        horizontal: "left",
+        vertical: "bottom",
       }}
       onClose={onClose}
       open={open}
@@ -32,17 +45,12 @@ export const AccountPopover = (props) => {
       <Box
         sx={{
           py: 1.5,
-          px: 2
+          px: 2,
         }}
       >
-        <Typography variant="overline">
-          Account
-        </Typography>
-        <Typography
-          color="text.secondary"
-          variant="body2"
-        >
-          Anika Visser
+        <Typography variant="overline">Conta</Typography>
+        <Typography color="text.secondary" variant="body2">
+          Caio Manduca
         </Typography>
       </Box>
       <Divider />
@@ -50,22 +58,16 @@ export const AccountPopover = (props) => {
         disablePadding
         dense
         sx={{
-          p: '8px',
-          '& > *': {
-            borderRadius: 1
-          }
+          p: "8px",
+          "& > *": {
+            borderRadius: 1,
+          },
         }}
       >
-        <MenuItem>
-          Sign out
+        <MenuItem onClick={handleLogout}>
+          <LoadingButton loading={loading}>Sair</LoadingButton>
         </MenuItem>
       </MenuList>
     </Popover>
   );
-};
-
-AccountPopover.propTypes = {
-  anchorEl: PropTypes.any,
-  onClose: PropTypes.func,
-  open: PropTypes.bool.isRequired
 };

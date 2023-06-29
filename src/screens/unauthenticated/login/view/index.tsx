@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { LoadingButton } from "@mui/lab";
 import {
   Box,
   Button,
@@ -9,12 +10,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { axiosInstance } from "../../../../services/instance";
-import endpoints from "../../../../services/requests/endpoints";
 import { useSnackbar } from "notistack";
+import { useDispatch, useSelector } from "../../../../services/store";
+import { fetchLogin } from "../../../../services/store/slices/auth";
 
 const View = () => {
-  const enqueueSnackbar = useSnackbar();
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+  const { loading } = useSelector((state: any) => state.Auth);
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -30,20 +33,20 @@ const View = () => {
       password: "",
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const payload = {
         email: values.email,
         password: values.password,
       };
-      axiosInstance
-        .post(endpoints.login, payload)
-        .then((response: any) => {
-          // enqueueSnackbar(response.data.message, { variant: "success" });
-          console.log(response);
-        })
-        .catch((error: any) => {
-          console.log(error);
-        });
+
+      const response: any = await dispatch(fetchLogin(payload));
+
+      if (response.meta.requestStatus === "fulfilled") {
+        enqueueSnackbar(response.payload.message, { variant: "success" });
+        console.log(response);
+      } else {
+        enqueueSnackbar(response.payload.message, { variant: "error" });
+      }
     },
   });
 
@@ -109,38 +112,37 @@ const View = () => {
               error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
               helperText={formik.touched.email && formik.errors.email}
-              label="Email Address"
+              label="Email"
               margin="normal"
               name="email"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               type="email"
               value={formik.values.email}
-              variant="outlined"
             />
             <TextField
               error={Boolean(formik.touched.password && formik.errors.password)}
               fullWidth
               helperText={formik.touched.password && formik.errors.password}
-              label="Password"
+              label="Senha"
               margin="normal"
               name="password"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               type="password"
               value={formik.values.password}
-              variant="outlined"
             />
             <Box sx={{ py: 2 }}>
-              <Button
+              <LoadingButton
+                loading={loading}
                 color="primary"
                 fullWidth
                 size="large"
                 type="submit"
                 variant="contained"
               >
-                Sign In Now
-              </Button>
+                Fazer Login
+              </LoadingButton>
             </Box>
             <Typography color="textSecondary" variant="body2">
               Não possui uma conta?{" "}

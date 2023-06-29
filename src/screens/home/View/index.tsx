@@ -1,18 +1,51 @@
-import { Container, Stack, Typography } from "@mui/material";
+import { Container, Grid, Box } from "@mui/material";
+import Budget from "../../../components/home/budget";
+import TotalCustomers from "../../../components/home/total-customers";
+import Sales from "../../../components/home/sales";
+import TasksProgress from "../../../components/home/task-progress";
+import TotalProfit from "../../../components/home/total-profit";
+import TrafficByDevice from "../../../components/home/traffic-by-device";
+import LatestProducts from "../../../components/home/latest-products";
+import LatestOrders from "../../../components/home/latest-orders";
 
 const View = () => {
   return (
-    <Container
-      component={Stack}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      height="100vh"
+    <Box
+      component="main"
+      sx={{
+        flexGrow: 1,
+        py: 8,
+      }}
     >
-      <Typography variant="h1" align="center">
-        Seja bem vindo!
-      </Typography>
-    </Container>
+      <Container>
+        <Grid container spacing={3}>
+          <Grid item lg={3} sm={6} xl={3} xs={12}>
+            <Budget />
+          </Grid>
+          <Grid item xl={3} lg={3} sm={6} xs={12}>
+            <TotalCustomers />
+          </Grid>
+          <Grid item xl={3} lg={3} sm={6} xs={12}>
+            <TasksProgress />
+          </Grid>
+          <Grid item xl={3} lg={3} sm={6} xs={12}>
+            <TotalProfit sx={{ height: "100%" }} />
+          </Grid>
+          <Grid item lg={8} md={12} xl={9} xs={12}>
+            <Sales />
+          </Grid>
+          <Grid item lg={4} md={6} xl={3} xs={12}>
+            <TrafficByDevice sx={{ height: "100%" }} />
+          </Grid>
+          <Grid item lg={4} md={6} xl={3} xs={12}>
+            <LatestProducts sx={{ height: "100%" }} />
+          </Grid>
+          <Grid item lg={8} md={12} xl={9} xs={12}>
+            <LatestOrders />
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 
