@@ -4,22 +4,31 @@ import { Layout } from "../layouts/dashboard/layout";
 import NotFound from "../screens/404";
 import Home from "../screens/home";
 import { Login } from "../screens/unauthenticated/login";
-import GuestAdmin from "../guards/GuestUser";
+import GuestUser from "../guards/GuestUser";
 import UserGuard from "../guards/UserGuard";
 import Account from "../screens/profile/view";
+import BooksList from "../screens/books";
+import CompaniesList from "../screens/companies";
+import Settings from "../screens/settings";
+import Profile from "../screens/profile";
+import UsersList from "../screens/users";
 
 export default function Router() {
   return useRoutes([
     {
-      path: "/register",
-      element: <Register />,
+      path: "/cadastro",
+      element: (
+        <GuestUser>
+          <Register />
+        </GuestUser>
+      ),
     },
     {
       path: "/login",
       element: (
-        <GuestAdmin>
+        <GuestUser>
           <Login />
-        </GuestAdmin>
+        </GuestUser>
       ),
     },
     {
@@ -35,9 +44,25 @@ export default function Router() {
           element: <Home />,
         },
         {
-          path: '/minha-conta',
-          element: <Account />
-        }
+          path: "/livros",
+          element: <BooksList />,
+        },
+        {
+          path: "/usuarios",
+          element: <UsersList />,
+        },
+        {
+          path: "/empresas",
+          element: <CompaniesList />,
+        },
+        {
+          path: "/minha-conta",
+          element: <Profile />,
+        },
+        {
+          path: "/configuracoes",
+          element: <Settings />,
+        },
       ],
     },
     {

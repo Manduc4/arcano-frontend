@@ -12,7 +12,10 @@ import {
 } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "../../../../services/store";
-import { fetchLogin } from "../../../../services/store/slices/auth";
+import {
+  fetchLogin,
+  stopLoading,
+} from "../../../../services/store/slices/auth";
 
 const View = () => {
   const dispatch = useDispatch();
@@ -43,11 +46,12 @@ const View = () => {
         const response: any = await dispatch(fetchLogin(payload));
         if (response.meta.requestStatus === "fulfilled") {
           enqueueSnackbar(response.payload.message, { variant: "success" });
-          console.log(response);
         } else {
           enqueueSnackbar(response.payload.message, { variant: "error" });
         }
       } catch (error: any) {
+        dispatch(stopLoading());
+        enqueueSnackbar("Ocorreu um erro.", { variant: "error" });
         console.log(error);
       }
     },
@@ -150,7 +154,7 @@ const View = () => {
             <Typography color="textSecondary" variant="body2">
               Não possui uma conta?{" "}
               <Link
-                href="/register"
+                href="/cadastro"
                 variant="subtitle2"
                 underline="hover"
                 sx={{

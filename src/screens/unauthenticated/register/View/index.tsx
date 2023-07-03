@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
   Box,
-  Button,
   Checkbox,
   Container,
   FormHelperText,
@@ -10,10 +9,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { axiosInstance } from "../../../../services/instance";
-import endpoints from "../../../../services/requests/endpoints";
+import { useDispatch, useSelector } from "../../../../services/store";
+import { fetchCreateUser } from "../../../../services/store/actions/users";
+import { useSnackbar } from "notistack";
+import { LoadingButton } from "@mui/lab";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+  const { loading } = useSelector((state: any) => state.Auth);
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Email inválido.")
@@ -34,20 +42,29 @@ const Register = () => {
       policy: false,
     },
     validationSchema,
-    onSubmit: (values) => {
-      const payload = {
+    onSubmit: async (values) => {
+      const data = {
         email: values.email,
         name: values.firstName + " " + values.lastName,
         password: values.password,
       };
-      axiosInstance
-        .post(endpoints.register, payload)
-        .then((response: any) => {
-          console.log(response);
-        })
-        .catch((error: any) => {
-          console.log(error);
-        });
+
+      try {
+        const { meta, payload }: any = await dispatch(fetchCreateUser(data));
+        if (meta.requestStatus === "fulfilled") {
+          enqueueSnackbar(payload.message, { variant: "success" });
+          navigate("/login");
+        } else {
+          const errorResponse = payload as AxiosError<Error>;
+          enqueueSnackbar(
+            errorResponse.response?.data.message || "Ocorreu um problema.",
+            { variant: "error" }
+          );
+        }
+      } catch (error: any) {
+        enqueueSnackbar("Ocorreu um erro", { variant: "error" });
+        console.log(error);
+      }
     },
   });
 
@@ -150,7 +167,8 @@ const Register = () => {
               <FormHelperText error>{formik.errors.policy}</FormHelperText>
             )}
             <Box sx={{ py: 2 }}>
-              <Button
+              <LoadingButton
+                loading={loading}
                 color="primary"
                 fullWidth
                 size="large"
@@ -158,7 +176,7 @@ const Register = () => {
                 variant="contained"
               >
                 Registrar
-              </Button>
+              </LoadingButton>
             </Box>
             <Typography color="textSecondary" variant="body2">
               Já possui uma conta?{" "}

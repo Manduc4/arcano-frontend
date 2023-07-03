@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { SideNav } from "./side-nav";
-import { TopNav } from "./top-nav";
+import { SideNav } from "./sideNav";
+import { TopNav } from "./topNav";
 import { Outlet, useLocation } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 const SIDE_NAV_WIDTH = 280;
 
@@ -14,8 +14,7 @@ const LayoutRoot = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("lg")]: {
     paddingLeft: SIDE_NAV_WIDTH,
   },
-  overflow: 'hidden',
-
+  overflow: "hidden",
 }));
 
 const LayoutContainer = styled("div")({
@@ -50,16 +49,18 @@ export const Layout = (props) => {
       <TopNav onNavOpen={() => setOpenNav(true)} />
       <SideNav onClose={() => setOpenNav(false)} open={openNav} />
       <LayoutRoot>
-        <Box
-          sx={{
-            display: "flex",
-            flex: "1 1 auto",
-            flexDirection: "column",
-            width: "100%",
-          }}
-        >
-          <Outlet />
-        </Box>
+        <Container>
+          <Box
+            sx={{
+              display: "flex",
+              flex: "1 1 auto",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <Outlet />
+          </Box>
+        </Container>
       </LayoutRoot>
     </>
   );

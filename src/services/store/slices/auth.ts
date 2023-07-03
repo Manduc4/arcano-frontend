@@ -1,13 +1,43 @@
-import { createSlice, createAsyncThunk, Reducer } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  Reducer,
+  createAction,
+} from "@reduxjs/toolkit";
 import { axiosInstance } from "../../instance";
 import endpoints from "../../requests/endpoints";
+import {
+  fetchCreateUser,
+  fetchUpdatePassword,
+  fetchUpdateUser,
+  fetchUserList,
+} from "../actions/users";
 
-const initialState = {
+export interface AuthSliceProps {
+  signed: boolean;
+  loading: boolean;
+  token: {
+    value: string;
+    expires: string;
+  };
+  user: {
+    id?: number;
+    name: string;
+    email: string;
+  };
+}
+
+const initialState: AuthSliceProps = {
   signed: false,
   loading: false,
   token: {
     value: "",
     expires: "",
+  },
+  user: {
+    id: 0,
+    name: "",
+    email: "",
   },
 };
 
@@ -16,6 +46,10 @@ export interface LoginResponseProps {
   token: {
     value: string;
     expires: string;
+  };
+  user: {
+    name: string;
+    email: string;
   };
 }
 
@@ -63,6 +97,8 @@ export const logout = createAsyncThunk<LogoutResponseProps>(
   }
 );
 
+export const stopLoading = createAction("authentication.stopLoading");
+
 const authSlice = createSlice({
   name: "Auth",
   initialState,
@@ -80,6 +116,7 @@ const authSlice = createSlice({
         state.signed = true;
         state.loading = false;
         state.token = action.payload.token;
+        state.user = action.payload.user;
       })
       .addCase(logout.pending, (state, action) => {
         state.loading = true;
@@ -91,6 +128,41 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state, action) => {
         state.loading = false;
         state.signed = false;
+        state.user.name = "";
+        state.user.email = "";
+      })
+      .addCase(fetchCreateUser.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(fetchCreateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.signed = true;
+      })
+      .addCase(fetchCreateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.signed = false;
+      })
+      .addCase(fetchUpdateUser.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(fetchUpdateUser.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(fetchUpdateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;
+      })
+      .addCase(fetchUpdatePassword.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(fetchUpdatePassword.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(fetchUpdatePassword.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(stopLoading, (state, action) => {
+        state.loading = false;
       });
   },
 });

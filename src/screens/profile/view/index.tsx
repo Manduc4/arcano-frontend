@@ -1,8 +1,8 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
-import ProfileForm from "../../../components/profile/profile-form";
-import ProfileHeader from "../../../components/profile/profile-header";
+import ProfileForm from "../../../components/profile/profileForm";
+import ProfileHeader from "../../../components/profile/profileHeader";
 
-const Account = () => (
+const View = () => (
   <>
     <Box
       component="main"
@@ -28,4 +28,4 @@ const Account = () => (
   </>
 );
 
-export default Account;
+export default View;

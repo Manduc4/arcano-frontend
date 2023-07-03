@@ -10,24 +10,30 @@ import {
   Typography,
 } from "@mui/material";
 import { useDispatch, useSelector } from "../../services/store";
-import { logout } from "../../services/store/slices/auth";
+import { logout, stopLoading } from "../../services/store/slices/auth";
 import { LoadingButton } from "@mui/lab";
 import { useSnackbar } from "notistack";
 
-export const AccountPopover = (props) => {
+export const AccountPopover = (props: any) => {
   const { anchorEl, onClose, open } = props;
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.Auth);
   const { enqueueSnackbar } = useSnackbar();
 
   const handleLogout = async () => {
-    const response = await dispatch(logout());
+    try {
+      const response = await dispatch(logout());
 
-    if (response.meta.requestStatus) {
-      enqueueSnackbar(response.payload.message, { varian: "success" });
-    } else {
-      enqueueSnackbar(response.payload.message, { varian: "error" });
-      console.error(response.payload.message);
+      if (response.meta.requestStatus) {
+        enqueueSnackbar(response.payload.message, { varian: "success" });
+      } else {
+        enqueueSnackbar(response.payload.message, { varian: "error" });
+        console.error(response.payload.message);
+      }
+    } catch (error) {
+      dispatch(stopLoading());
+      enqueueSnackbar('Ocorreu um erro.', { variant: "error" });
+      console.log(error);
     }
   };
 

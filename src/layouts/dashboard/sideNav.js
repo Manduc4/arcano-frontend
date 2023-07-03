@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import { Logo } from "../../components/logo";
 import { Scrollbar } from "../../components/scrollbar";
 import { items } from "./config";
-import { SideNavItem } from "./side-nav-item";
+import { SideNavItem } from "./sideNavItem";
 import { useLocation } from "react-router-dom";
 
 export const SideNav = (props) => {
