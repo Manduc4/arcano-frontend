@@ -4,5 +4,6 @@ export default {
   login: "/login",
   logout: "/logout",
   users: "/users",
-  changePassword: "/me/users"
+  changePassword: "/me/users",
+  recovery: "/recovery",
 };

@@ -99,6 +99,34 @@ export const fetchUpdatePassword = createAsyncThunk<
   }
 });
 
+export interface RecoveryPayloadProps {
+  email: string;
+}
+
+export interface RecoveryResponseProps {
+  email: string;
+}
+
+export const fetchRecovery = createAsyncThunk<
+  RecoveryResponseProps,
+  RecoveryPayloadProps
+>("authentication.fetchRecovery", async (data, { rejectWithValue }) => {
+  try {
+    const api = axiosInstance;
+    const response = await api({
+      baseURL: `${process.env.REACT_APP_BASE_URL}${endpoints.recovery}`,
+      method: "POST",
+      data: {
+        email: data.email,
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    rejectWithValue(err);
+  }
+});
+
 export const fetchUserList = createAsyncThunk<CreateUserResponseProps>(
   "authentication.fetchUserList",
   async (data, { rejectWithValue }) => {

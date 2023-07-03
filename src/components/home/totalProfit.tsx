@@ -7,10 +7,10 @@ const TotalProfit = (props: any) => (
       <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
         <Grid item>
           <Typography color="textSecondary" gutterBottom variant="overline">
-            TOTAL PROFIT
+            LUCRO TOTAL
           </Typography>
           <Typography color="textPrimary" variant="h4">
-            $23k
+            R$23k
           </Typography>
         </Grid>
         <Grid item>

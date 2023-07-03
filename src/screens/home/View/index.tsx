@@ -1,12 +1,12 @@
 import { Container, Grid, Box } from "@mui/material";
 import Budget from "../../../components/home/budget";
-import TotalCustomers from "../../../components/home/total-customers";
+import TotalCustomers from "../../../components/home/totalCustomers";
 import Sales from "../../../components/home/sales";
-import TasksProgress from "../../../components/home/task-progress";
-import TotalProfit from "../../../components/home/total-profit";
-import TrafficByDevice from "../../../components/home/traffic-by-device";
-import LatestProducts from "../../../components/home/latest-products";
-import LatestOrders from "../../../components/home/latest-orders";
+import TasksProgress from "../../../components/home/taskProgress";
+import TotalProfit from "../../../components/home/totalProfit";
+import TrafficByDevice from "../../../components/home/trafficByDevice";
+import LatestProducts from "../../../components/home/latestProducts";
+import LatestOrders from "../../../components/home/latestOrders";
 
 const View = () => {
   return (

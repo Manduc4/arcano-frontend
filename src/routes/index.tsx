@@ -12,6 +12,7 @@ import CompaniesList from "../screens/companies";
 import Settings from "../screens/settings";
 import Profile from "../screens/profile";
 import UsersList from "../screens/users";
+import Recovery from "../screens/unauthenticated/recovery";
 
 export default function Router() {
   return useRoutes([
@@ -28,6 +29,14 @@ export default function Router() {
       element: (
         <GuestUser>
           <Login />
+        </GuestUser>
+      ),
+    },
+    {
+      path: "/recuperar-senha",
+      element: (
+        <GuestUser>
+          <Recovery />
         </GuestUser>
       ),
     },

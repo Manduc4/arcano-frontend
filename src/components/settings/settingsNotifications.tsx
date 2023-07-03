@@ -14,7 +14,7 @@ import {
 const SettingsNotifications = (props: any) => (
   <form {...props}>
     <Card>
-      <CardHeader subheader="Manage the notifications" title="Notifications" />
+      <CardHeader subheader="Gerenciar as notificações" title="Notificações" />
       <Divider />
       <CardContent>
         <Grid container spacing={6} wrap="wrap">
@@ -29,7 +29,7 @@ const SettingsNotifications = (props: any) => (
             xs={12}
           >
             <Typography color="textPrimary" gutterBottom variant="h6">
-              Notifications
+              Notificações
             </Typography>
             <FormControlLabel
               control={<Checkbox color="primary" defaultChecked />}
@@ -37,12 +37,12 @@ const SettingsNotifications = (props: any) => (
             />
             <FormControlLabel
               control={<Checkbox color="primary" defaultChecked />}
-              label="Push Notifications"
+              label="Notificações via push"
             />
             <FormControlLabel control={<Checkbox />} label="Text Messages" />
             <FormControlLabel
               control={<Checkbox color="primary" defaultChecked />}
-              label="Phone calls"
+              label="Chamadas"
             />
           </Grid>
           <Grid
@@ -56,7 +56,7 @@ const SettingsNotifications = (props: any) => (
             xs={12}
           >
             <Typography color="textPrimary" gutterBottom variant="h6">
-              Messages
+              Mensagens
             </Typography>
             <FormControlLabel
               control={<Checkbox color="primary" defaultChecked />}
@@ -64,11 +64,11 @@ const SettingsNotifications = (props: any) => (
             />
             <FormControlLabel
               control={<Checkbox />}
-              label="Push Notifications"
+              label="Notificações via push"
             />
             <FormControlLabel
               control={<Checkbox color="primary" defaultChecked />}
-              label="Phone calls"
+              label="Chamadas"
             />
           </Grid>
         </Grid>
@@ -82,7 +82,7 @@ const SettingsNotifications = (props: any) => (
         }}
       >
         <Button color="primary" variant="contained">
-          Save
+          Salvar
         </Button>
       </Box>
     </Card>

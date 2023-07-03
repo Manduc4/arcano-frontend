@@ -16,6 +16,7 @@ import {
   fetchLogin,
   stopLoading,
 } from "../../../../services/store/slices/auth";
+import { PATH_AUTH } from "../../../../routes/paths";
 
 const View = () => {
   const dispatch = useDispatch();
@@ -154,7 +155,7 @@ const View = () => {
             <Typography color="textSecondary" variant="body2">
               Não possui uma conta?{" "}
               <Link
-                href="/cadastro"
+                href={PATH_AUTH.register}
                 variant="subtitle2"
                 underline="hover"
                 sx={{
@@ -162,6 +163,19 @@ const View = () => {
                 }}
               >
                 Registre-se
+              </Link>
+            </Typography>
+            <Typography color="textSecondary" variant="body2">
+              Esqueceu a senha?{" "}
+              <Link
+                href={PATH_AUTH.recovery}
+                variant="subtitle2"
+                underline="hover"
+                sx={{
+                  cursor: "pointer",
+                }}
+              >
+                Recuperar senha
               </Link>
             </Typography>
           </form>

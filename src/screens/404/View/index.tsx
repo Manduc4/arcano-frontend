@@ -1,6 +1,7 @@
 import ArrowLeftIcon from "@heroicons/react/24/solid/ArrowLeftIcon";
 import { Box, Button, Container, SvgIcon, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { PATH_APP } from "../../../routes/paths";
 
 const View = () => (
   <>
@@ -45,7 +46,7 @@ const View = () => (
           </Typography>
           <Button
             component={Link}
-            to="/"
+            to={PATH_APP.home}
             startIcon={
               <SvgIcon fontSize="small">
                 <ArrowLeftIcon />

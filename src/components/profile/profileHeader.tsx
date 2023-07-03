@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useSelector } from "../../services/store";
-import { Form, FormikProvider, useFormik } from "formik";
 
 const userMock = {
   avatar: "/static/images/avatars/avatar_6.png",
@@ -23,10 +22,7 @@ const userMock = {
 const ProfileHeader = () => {
   const user = useSelector((state: any) => state.Auth.user);
 
-
-
   return (
-
         <Card>
           <CardContent>
             <Box

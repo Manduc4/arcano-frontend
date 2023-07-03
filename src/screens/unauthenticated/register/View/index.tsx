@@ -15,6 +15,7 @@ import { useSnackbar } from "notistack";
 import { LoadingButton } from "@mui/lab";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import { PATH_AUTH } from "../../../../routes/paths";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const Register = () => {
     firstName: Yup.string().max(255).required("O Primeiro Nome é obrigatório."),
     lastName: Yup.string().max(255).required("O Último Nome é obrigatório."),
     password: Yup.string().max(255).required("A Senha é obrigatória."),
-    policy: Yup.boolean().oneOf([true], "Este campo deve ser marcado."),
+    // policy: Yup.boolean().oneOf([true], "Este campo deve ser marcado."),
   });
 
   const formik = useFormik({
@@ -39,7 +40,7 @@ const Register = () => {
       firstName: "",
       lastName: "",
       password: "",
-      policy: false,
+      // policy: false,
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -53,7 +54,7 @@ const Register = () => {
         const { meta, payload }: any = await dispatch(fetchCreateUser(data));
         if (meta.requestStatus === "fulfilled") {
           enqueueSnackbar(payload.message, { variant: "success" });
-          navigate("/login");
+          navigate(PATH_AUTH.login);
         } else {
           const errorResponse = payload as AxiosError<Error>;
           enqueueSnackbar(
@@ -142,7 +143,7 @@ const Register = () => {
               value={formik.values.password}
               variant="outlined"
             />
-            <Box
+            {/* <Box
               sx={{
                 alignItems: "center",
                 display: "flex",
@@ -156,16 +157,16 @@ const Register = () => {
               />
               <Typography color="textSecondary" variant="body2">
                 Eu li os{" "}
-                {/* <NextLink href="#" passHref>
+                <NextLink href="#" passHref>
                   <Link color="primary" underline="always" variant="subtitle2">
                     Terms and Conditions
                   </Link>
-                </NextLink> */}
+                </NextLink>
               </Typography>
-            </Box>
-            {Boolean(formik.touched.policy && formik.errors.policy) && (
+            </Box> */}
+            {/* {Boolean(formik.touched.policy && formik.errors.policy) && (
               <FormHelperText error>{formik.errors.policy}</FormHelperText>
-            )}
+            )} */}
             <Box sx={{ py: 2 }}>
               <LoadingButton
                 loading={loading}
@@ -180,7 +181,7 @@ const Register = () => {
             </Box>
             <Typography color="textSecondary" variant="body2">
               Já possui uma conta?{" "}
-              <Link href="/login" variant="subtitle2" underline="hover">
+              <Link href={PATH_AUTH.login} variant="subtitle2" underline="hover">
                 Login
               </Link>
             </Typography>

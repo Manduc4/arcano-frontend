@@ -52,7 +52,7 @@ export const LatestProducts = (props: any) => (
   <Card {...props}>
     <CardHeader
       subtitle={`${products.length} in total`}
-      title="Latest Products"
+      title="Produtos Mais recentes"
     />
     <Divider />
     <List>
@@ -92,7 +92,7 @@ export const LatestProducts = (props: any) => (
         size="small"
         variant="text"
       >
-        View all
+        Ver tudo
       </Button>
     </Box>
   </Card>

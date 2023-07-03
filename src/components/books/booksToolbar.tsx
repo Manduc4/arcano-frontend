@@ -24,17 +24,17 @@ const BooksToolbar = (props: any) => (
       }}
     >
       <Typography sx={{ m: 1 }} variant="h4">
-        Customers
+        Clientes
       </Typography>
       <Box sx={{ m: 1 }}>
         <Button startIcon={<UploadIcon fontSize="small" />} sx={{ mr: 1 }}>
-          Import
+          Importar
         </Button>
         <Button startIcon={<DownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
-          Export
+          Exportar
         </Button>
         <Button color="primary" variant="contained">
-          Add Customers
+          Adicionar clientes
         </Button>
       </Box>
     </Box>
@@ -53,7 +53,7 @@ const BooksToolbar = (props: any) => (
                   </InputAdornment>
                 ),
               }}
-              placeholder="Search customer"
+              placeholder="Pesquisar"
               variant="outlined"
             />
           </Box>

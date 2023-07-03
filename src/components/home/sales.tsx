@@ -23,7 +23,7 @@ const Sales = () => {
         borderRadius: 4,
         categoryPercentage: 0.5,
         data: [18, 5, 19, 27, 29, 19, 20],
-        label: "This year",
+        label: "Este ano",
         maxBarThickness: 10,
       },
       {
@@ -33,11 +33,11 @@ const Sales = () => {
         borderRadius: 4,
         categoryPercentage: 0.5,
         data: [11, 20, 12, 29, 30, 25, 13],
-        label: "Last year",
+        label: "Ano passado",
         maxBarThickness: 10,
       },
     ],
-    labels: ["1 Aug", "2 Aug", "3 Aug", "4 Aug", "5 Aug", "6 Aug", "7 aug"],
+    labels: ["1 Ago", "2 Ago", "3 Ago", "4 Ago", "5 Ago", "6 Ago", "7 Ago"],
   };
 
   const options: any = {
@@ -94,10 +94,10 @@ const Sales = () => {
       <CardHeader
         action={
           <Button endIcon={<ArrowDropDownIcon fontSize="small" />} size="small">
-            Last 7 days
+            Últimos 7 dias
           </Button>
         }
-        title="Latest Sales"
+        title="Últimas vendas"
       />
       <Divider />
       <CardContent>
@@ -123,7 +123,7 @@ const Sales = () => {
           endIcon={<ArrowRightIcon fontSize="small" />}
           size="small"
         >
-          Overview
+          Visão geral
         </Button>
       </Box>
     </Card>

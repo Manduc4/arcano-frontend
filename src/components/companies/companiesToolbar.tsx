@@ -27,26 +27,26 @@ const CompaniesToolbar = (props: any) => (
         sx={{ m: 1 }}
         variant="h4"
       >
-        Products
+        Produtos
       </Typography>
       <Box sx={{ m: 1 }}>
         <Button
           startIcon={(<UploadIcon fontSize="small" />)}
           sx={{ mr: 1 }}
         >
-          Import
+          Importar
         </Button>
         <Button
           startIcon={(<DownloadIcon fontSize="small" />)}
           sx={{ mr: 1 }}
         >
-          Export
+          Exportar
         </Button>
         <Button
           color="primary"
           variant="contained"
         >
-          Add products
+          Adicionar Produtos
         </Button>
       </Box>
     </Box>
@@ -68,7 +68,7 @@ const CompaniesToolbar = (props: any) => (
                   </InputAdornment>
                 )
               }}
-              placeholder="Search product"
+              placeholder="Pesquisar"
               variant="outlined"
             />
           </Box>

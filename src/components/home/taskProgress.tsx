@@ -15,10 +15,10 @@ const TasksProgress = () => (
       <Grid container spacing={3} sx={{ justifyContent: "space-between" }}>
         <Grid item>
           <Typography color="textSecondary" gutterBottom variant="overline">
-            TASKS PROGRESS
+            Tasks
           </Typography>
           <Typography color="textPrimary" variant="h4">
-            75.5%
+            75,5%
           </Typography>
         </Grid>
         <Grid item>

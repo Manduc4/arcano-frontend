@@ -8,6 +8,7 @@ import { axiosInstance } from "../../instance";
 import endpoints from "../../requests/endpoints";
 import {
   fetchCreateUser,
+  fetchRecovery,
   fetchUpdatePassword,
   fetchUpdateUser,
   fetchUserList,
@@ -159,6 +160,15 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchUpdatePassword.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(fetchRecovery.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(fetchRecovery.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(fetchRecovery.fulfilled, (state, action) => {
         state.loading = false;
       })
       .addCase(stopLoading, (state, action) => {
